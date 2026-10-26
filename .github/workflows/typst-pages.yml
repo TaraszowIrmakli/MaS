@@ -1,0 +1,48 @@
+name: Render Typst and deploy to GitHub Pages
+
+on:
+    push:
+    workflow_dispatch:
+
+permissions:
+    contents: read
+    pages: write
+    id-token: write
+
+concurrency:
+    group: pages
+    cancel-in-progress: true
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+
+            - uses: typst-community/setup-typst@v4
+
+            - name: Compile
+              run: |
+                  mkdir -p _site/light _site/dark
+                  typst compile main.typ --input theme=light _site/light/main.pdf
+                  typst compile main.typ --input theme=dark _site/dark/main.pdf
+                  echo '<meta http-equiv="refresh" content="0; url=light/main.pdf">' > _site/light.html
+                  echo '<meta http-equiv="refresh" content="0; url=dark/main.pdf">' > _site/dark.html
+                  echo '<meta http-equiv="refresh" content="0; url=light/main.pdf">' > _site/index.html
+
+            - uses: actions/configure-pages@v5
+
+            - uses: actions/upload-pages-artifact@v3
+              with:
+                  path: _site
+
+    deploy:
+        needs: build
+        if: github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
+        runs-on: ubuntu-latest
+        environment:
+            name: github-pages
+            url: ${{ steps.deployment.outputs.page_url }}
+        steps:
+            - id: deployment
+              uses: actions/deploy-pages@v4
