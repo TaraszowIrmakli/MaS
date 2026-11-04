@@ -431,7 +431,7 @@ $ (x^r)' = (x^(m/n))'
 Über differenzierbare Funktion lassen sich allgemeine Aussagen finden.
 
 == Satz 2.1 (differenzierbare Funktionen sind stetig)
-Wenn $f$ auf $[a; b]$ differenzierbar ist, so ist $f$ auf $[a; b]$ stetig.
+Wenn $f$ auf $(a; b)$ differenzierbar ist, so ist $f$ auf $(a; b)$ stetig.
 
 == Beweis:
 
@@ -450,15 +450,58 @@ Also ist $f$ stetig.
 
 Im folgendem benötigen wir diese zwei Sätze:
 
-== Satz 2.2 (stetige Funktion auf $[a; b]$)
-Ist $f$ auf $[a; b]$ stetig, so ist $f$ dort beschränkt.
+== Satz 2.2 (stetige Funktion auf $(a; b)$)
+Ist $f$ auf $(a; b)$ stetig, so ist $f$ dort beschränkt.
 
 === Beweis:
 Nein.
 
 == Satz 2.3 (Satz von Weierstraß)
-Ist $f$ auf $[a; b]$ stetig, so nimmt $f$ auf $[a; b]$ Maximum und Minimum an.
+Ist $f$ auf $(a; b)$ stetig, so nimmt $f$ auf $(a; b)$ Maximum und Minimum an.
 // Graph: ...
 
 === Beweis:
 Nein.
+
+_2026-11-03 (W45 Dienstag)_
+== Satz 2.5 (Mittelwertsatz der Differentialrechnung)
+Sei $f: (a; b) -> RR$ stetig und auf $(a; b)$ differenzierbar. So gibt es ein $x_0 in (a; b)$ mit:
+$ f'(x_0) = (f(b) - f(a)) / (b - a) $
+
+=== Beweis:
+Wir benötigen eine Hilfsfunktion:
+$ H(x) = f(x) - underbrace(f(a) + (f(b) - f(a)) / (b - a) dot (x - a), "Sektante durch" (a, f(a)) "und" (b, f(b))) $
+$H(x)$ ist stetig auf $(a; b)$ und differenzierbar auf $(a; b)$. Es gilt:
+$ H(a) = f(a) - f(a) - (f(b) - f(a)) / (b - a) dot (a - a) = 0 - (f(b) - f(a)) / (b - a) dot 0 = 0 $
+$ H(b) = f(b) - f(a) - (f(b) - f(a)) / (b - a) dot (b - a) = f(b) - f(a) - (f(b) - f(a)) / (b - a) dot (b - a) = 0 $
+Also existiert nach Satz von Rolle ein $x_0 in (a; b)$ mit:
+$ <=> f'(x_0) - 0 - (f(b) - f(a)) / (b - a) dot 1 = 0 $
+$ <=> f'(x_0) = (f(b) - f(a)) / (b - a) $
+
+= 2.1 -- Folgerungen aus dem Mittelwertsatz
+== Satz 2.6 (Monotoniesatz)
+Die Funktion $f: (a; b) -> RR$ ist stetig und auf $[a; b]$ differenzierbar. Dann gilt:
++ $f$ ist genau dann monoton wachsend/falled, wenn $f'(x_0)$ größer/kleiner gleich Null für alle $x_0 in [a; b]$.
++ Wenn $f'(x_0)$ größer/kleiner als Null für alle $x_0 in [a; b]$ gilt, so ist $f$ streng monotoon wachsend/fallend.
+
+=== Beweis:
+Wir beginnen mit i) und der Hinrichtung ($f' => f$ monoton).
+Wir zeigen es für wachsende Monotonie. Nach dem Mittelwertsatz 2.5 gilt für $x_1, x_2 in (a; b)$, dass es ein $x_0 in [x_1; x_2]$ gibt mit: $
+f'(x_0) =^"MWS" (f(x_2) - f(x_1)) / (x_2 - x_1) >=^"Vorraussetzung" 0 \
+<=> f(x_2) - f(x_1) >= 0 \
+<=> f(x_2) >= f(x_1) $
+Also ist $f$ monoton wachsend auf $(x_1; x_2)$.
+Da $x_1$ und $x_2$ beliebig sind, ist $f$ auf $(a; b)$ monoton wachsend.
+Monoton fallend und ii) sind analog.
+// graphen und so
+
+Nun die Rückrichtung ($f$ monoton $=> f'$).
+Sei $f$ monoton wachsend, so gilt für ein $x_1 in (a; b)$ und ein beliebig, aber festes $x_2 in (a; b)$ nach dem Mittelwertsatz mit $x_0 in [a; b]$:
+$ (f(x_2) - f(x_1)) / (x_2 - x_1) = f'(x_0) $
+Da $f$ monoton wachsend, folgt: $f'(x_0) >= 0$.
+Da $(x_1; x_2)$ beliebig ist, gilt $f'(x_0) >= 0$ für alle $x_0 in (a; b)$.
+
+== Satz 2.7 (Schrankensatz)
+Es sei $f: (a; b) -> RR$ stetig und auf $[a; b]$ differenzierbar.
+Wenn $m <= f'(x) <= M$ mit $m < M$ für alle $x in (a; b)$ gilt, dann folgt:
+$ m <= (f(b) - f(a)) / (b - a) <= M $
