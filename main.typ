@@ -505,3 +505,56 @@ Da $(x_1; x_2)$ beliebig ist, gilt $f'(x_0) >= 0$ für alle $x_0 in (a; b)$.
 Es sei $f: (a; b) -> RR$ stetig und auf $[a; b]$ differenzierbar.
 Wenn $m <= f'(x) <= M$ mit $m < M$ für alle $x in (a; b)$ gilt, dann folgt:
 $ m <= (f(b) - f(a)) / (b - a) <= M $
+
+_2026-11-05 (W45 Donnerstag)_
+
+== Satz 2.8 (Verschwindende Ableitung)
+Es sei $f: (a; b) -> RR$ stetig und auf $[a; b]$ differenzierbar mit $f'(x) = 0$ für alle $x in [a; b]$.
+So ist $f$ konstant auf $[a; b]$.
+
+=== Beweis:
+Sei $f$ nicht konstant. Dann nimmt $f$ auf $(a; b)$ Maximum und Minimum mit $M != m$ an, also $f(x_M) = M$ und $f(x_m) = m$.
+Nach dem Mittelwertsatz gibt es ein $x_0$ mit $f'(x_0) = (M - m) / (x_M - x_m) != 0$.
+Dies ist ein Widerspruch, also ist $f$ konstant.
+
+=== Bemerkung:
+Somit gilt: $f$ konstant $<=> f'(x) = 0$
+
+== Satz 2.9 (erweiteter Mittelwertsatz)
+Es seien $f: (a; b) -> RR$ und $g: (a; b) -> RR$ stetig und auf $[a; b]$ differenzierbar.
+Somit existiert ein $x_0 in [a; b]$ mit:
+$ f'(x_0) dot (g(b) - g(a)) = g'(x_0) dot (f(b) - f(a)) $
+Mit $g'(x_0) != 0$:
+$ (f'(x_0)) / (g'(x_0)) = (f(b) - f(a)) / (g(b) - g(a)) $
+
+=== Beweis:
+Wir wenden den Satz von Rolle auf
+$ H(x) = f(x) - (f(b) - f(a)) / (g(b) - g(a)) dot (g(x) - g(a)) $
+an, da $H(a) = H(b) = f(a)$ ist.
+Es gibt eine Stelle $x_0 in [a; b]$ mit $H'(x_0) = 0$:
+$
+f'(x_0) - (f(b) - f(a)) / (g(b) - g(a)) dot g'(x_0) = 0 \
+<=> f'(x_0) dot (g(b) - g(a)) - ((f(b) - f(a)) dot g'(x_0)) = 0
+$
+
+= #underline[3 -- Funktionsuntersuchungen]
+== 3.1 Relative Extremwerte
+Neben Schnittpunkten mit den Koordinatenachsen sind auch relative Extermwerte interessant.
+
+== Definition 3.1 (relative Extermwerte)
+Eine Stelle $x_0 in D_f$ heißt Stelle eines *relativen* (oder *lokalen*) $cases("Maximums", "Minimums")$ vom
+Graphen $f$ genau dann, wenn es für eine Umgebung $U(x_0) subset.eq D_f$ gibt mit $f'(x) cases(>=, <=) f(x)$ für alle $x in U(x_0)$.
+Gilt $f(x_0) cases(>, <) f(x)$, dann heißt $x_0$ Stelle eines relativen $cases("Maximums", "Minimums")$ im *engeren Sinne*.
+Gilt nun $U(x_0) = D_f$, dann heißt $x_0$ Stelle eines absoluten $cases("Maximums", "Minimums")$.
+
+=== Bemerkung:
++ Absolute Extrema müssen nicht immer an den Rändern liegen.
++ An Rändern können nur absolute Extrema liegen.
+
+== Satz 3.1 (notwendige Bedingung für relative Extrema (Satz von Fermat (lange Überschrift)))
+Sei $f: (a; b)$ stetig und bei $x_0 in [a; b]$ differenzierbar. Wenn $f$ an $x_0$ ein relatives Extrema besitzt, dann ist $f'(x_0) = 0$.
+
+=== Beweis:
+Bei $x_0$ liegt ein Maximum vor. Wir wählen eine Umgebung $x_0$ mit $f(x) <= f(x_0)$ für alle $x in U(x_0)$.
+Somit gilt für eine Folge $(x_n)$ aus $U(x_0)$ mit $lim_(n->oo) x_n = x_0$ und $x_n < x_0$:
+$ lim_(x_n->x_0)_(x_n < x_0) (f(x_n) - f(x_0)) / (x_n 0 x_0) $
